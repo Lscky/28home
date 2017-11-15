@@ -12,4 +12,8 @@ public class SellOrder<T extends Product> extends Order<T> {
         return new SellOrder<>(product, client);
     }
 
+    public int compareValueOnEquals() {
+    	return 1;
+    }
+
 }

@@ -8,8 +8,8 @@ import java.util.*;
 
 public class PumpkinOrderService implements OrderService {
 
-    private TreeSet<SellOrder> sellOrders = new TreeSet<>(sellOrderComparator());
-    private TreeSet<BuyOrder> buyOrders = new TreeSet<>(buyOrderComparator());
+    private TreeSet<SellOrder> sellOrders = new TreeSet<>();
+    private TreeSet<BuyOrder> buyOrders = new TreeSet<>();
 
     private List<Trade> performedTrades = new ArrayList<>();
 
@@ -64,25 +64,4 @@ public class PumpkinOrderService implements OrderService {
         performedTrades.add(trade);
     }
 
-    private Comparator<Order> sellOrderComparator() {
-        return orderComparator(1);
-    }
-
-    private Comparator<Order> buyOrderComparator() {
-        return orderComparator(-1);
-    }
-
-    private Comparator<Order> orderComparator(int compareValueOnEquals) {
-        return (o1, o2) -> {
-            int priceCompare = o1.productPrice().compareTo(o2.productPrice());
-            if (priceCompare == 0) {
-                if (o1.client().equals(o2.client())) {
-                    return 0;
-                } else {
-                    return compareValueOnEquals;
-                }
-            }
-            return priceCompare;
-        };
-    }
 }
